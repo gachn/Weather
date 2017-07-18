@@ -1,0 +1,134 @@
+{{>header}}
+<div class="hero" data-bg-image="images/banner.png">
+    <div class="container">
+        <form action="/" class="find-location" method="GET">
+            <input type="text" name="q" placeholder="Find your location...">
+            <input type="submit" value="Find">
+        </form>
+
+    </div>
+</div>
+<div class="forecast-table">
+    <div class="container">
+        <div class="forecast-container">
+            <div class="today forecast">
+                <div class="forecast-header">
+                    <div class="day">{{day}}</div>
+                    <div class="date">{{date}}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="location">{{city}}</div>
+                    <div class="degree">
+                        <div class="num">{{temperature}}<sup>o</sup>{{type}}</div>
+                        <div class="forecast-icon">
+                            <img src="images/icons/{{icon}}.svg" alt="" width=150>
+                        </div>
+                    </div>
+                    <span><img src="images/icon-umberella.png" alt="">{{humidity}}%</span>
+                    <span><img src="images/icon-wind.png" alt="">{{windSpeed}} mph</span>
+                    <span><img src="images/icon-envelope.png" alt="">{{summary}}</span>
+                </div>
+            </div>
+            <div class="forecast">
+                <div class="forecast-header">
+                    <div class="day">{{day2.day}}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="forecast-icon">
+                        <img src="images/icons/{{day2.icon}}.svg" alt="" width=90>
+                    </div>
+                    <div class="degree">{{day2.temperatureMax}}<sup>o</sup>{{type}}</div>
+                    <small>{{day2.temperatureMin}}<sup>o</sup></small><br>
+                    <small><span style="text-transform:uppercase;"><strong>{{day2.icon}}</strong></span></small>
+                    
+                </div>
+            </div>
+            <div class="forecast">
+                <div class="forecast-header">
+                    <div class="day">{{day3.day}}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="forecast-icon">
+                        <img src="images/icons/{{day3.icon}}.svg" alt="" width=90>
+                    </div>
+                    <div class="degree">{{day3.temperatureMax}}<sup>o</sup>{{type}}</div>
+                    <small>{{day3.temperatureMin}}<sup>o</sup></small>
+                    <br><small><strong><span style="text-transform:uppercase;">{{day3.icon}}</strong></span></small>
+                    
+                </div>
+            </div>
+            <div class="forecast">
+                <div class="forecast-header">
+                    <div class="day">{{day4.day}}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="forecast-icon">
+                        <img src="images/icons/{{day4.icon}}.svg" alt="" width=90>
+                    </div>
+                    <div class="degree">{{day4.temperatureMax}}<sup>o</sup>{{type}}</div>
+                    <small>{{day4.temperatureMin}}<sup>o</sup></small>
+                    <br><small><span style="text-transform:uppercase;"><strong>{{day4.icon}}</strong></span></small>
+                    
+                </div>
+            </div>
+            <div class="forecast">
+                <div class="forecast-header">
+                    <div class="day">{{day5.day}}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="forecast-icon">
+                        <img src="images/icons/{{day5.icon}}.svg" alt="" width=90>
+                    </div>
+                    <div class="degree">{{day5.temperatureMax}}<sup>o</sup>{{type}}</div>
+                    <small>{{day5.temperatureMin}}<sup>o</sup></small>
+                    <br><small><span style="text-transform:uppercase;"><strong>{{day5.icon}}</strong></span></small>
+                    
+                </div>
+            </div>
+            <div class="forecast">
+                <div class="forecast-header">
+                    <div class="day">{{day6.day}}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="forecast-icon">
+                        <img src="images/icons/{{day6.icon}}.svg" alt="" width=90>
+                    </div>
+                    <div class="degree">{{day6.temperatureMax}}<sup>o</sup>{{type}}</div>
+                    <small>{{day6.temperatureMin}}<sup>o</sup></small>
+                    <br><small><span style="text-transform:uppercase;"><strong>{{day6.icon}}</strong></span></small>
+                    
+                </div>
+            </div>
+            <div class="forecast">
+                <div class="forecast-header">
+                    <div class="day">{{day7.day}}</div>
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content">
+                    <div class="forecast-icon">
+                        <img src="images/icons/{{day7.icon}}.svg" alt="" width=90>
+                    </div>
+                    <div class="degree">{{day7.temperatureMax}}<sup>o</sup>{{type}}</div>
+                    <small>{{day7.temperatureMin}}<sup>o</sup></small>
+                    <br><small><span style="text-transform:uppercase;"><strong>{{day7.icon}}</strong></span></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div align="center">
+<div id="map" style="width:85%;height:500px;margin-bottom:50px;"></div>
+</div>
+<script>
+function myMap() {
+  var myCenter = new google.maps.LatLng({{latitude}},{{longitude}});
+  var mapCanvas = document.getElementById("map");
+  var mapOptions = {center: myCenter, zoom: 12};
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+  var marker = new google.maps.Marker({position:myCenter});
+  marker.setMap(map);
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5I3RxBCN6hzAcT-vqoT8voSXHDqPju3c&callback=myMap"></script>
+
+{{>footer}}
