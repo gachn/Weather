@@ -39,11 +39,11 @@ app.set('view engine','hbs');
 app.use(express.static(process.env.PWD + '/public'));
 hbs.registerPartials(__dirname+'/views/partials');
 app.get('/',(req,res)=>{
-	var ip=requestIp.getClientIp(req);;
-	
-	if(ip==='127.0.0.1'){
+	var ip=requestIp.getClientIp(req);
+	console.log(`client Ip :: ${ip}`);
+if(ip==='127.0.0.1'){
 		ip='169.149.140.211';
-		console.log(ip);	
+
 	}
 	if(req._parsedOriginalUrl.query){
 	geocode.fetchAddress(req._parsedOriginalUrl.query,(errorMessage,result)=>{
