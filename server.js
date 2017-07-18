@@ -41,10 +41,6 @@ hbs.registerPartials(__dirname+'/views/partials');
 app.get('/',(req,res)=>{
 	var ip=requestIp.getClientIp(req);
 	console.log(`client Ip :: ${ip}`);
-if(ip==='127.0.0.1'){
-		ip='169.149.140.211';
-
-	}
 	if(req._parsedOriginalUrl.query){
 	geocode.fetchAddress(req._parsedOriginalUrl.query,(errorMessage,result)=>{
 	if(errorMessage){
@@ -66,11 +62,14 @@ if(ip==='127.0.0.1'){
 });	}
 	else{
 			iplocation.findLocation(ip,(error,result)=>{
-					if(error)
+					if(error){
+						console.log(`IP ERROR`);
 						res.render('index.hbs');
+					}
 					else
 					{
 						fetchWeather(result,(page,data)=>{
+						console.log(`IP RESULT ${result}`);	
 						if(page === 1)					
 						res.render('index.hbs');
 						else
