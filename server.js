@@ -36,7 +36,6 @@ hbs.registerHelper('longitude',()=>{
 });
 
 app.set('view engine','hbs');
-app.use(express.static(process.env.PWD + '/htdocs'));
 app.use(express.static(process.env.PWD + '/Public'));
 hbs.registerPartials(dirname+'/views/partials');
 app.get('/',(req,res)=>{
