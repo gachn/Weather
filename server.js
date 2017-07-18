@@ -10,7 +10,7 @@ const port=process.env.PORT || 3000;
 process.env.PWD = process.cwd();
 var app=express();
 var longitude,latitude,city;
-
+console.log(`Dir : ${process.cwd()}  : dirname : ${__dirname}`);
 var getCurrentDate=()=>{
 	var date=new Date();
 	var data={
