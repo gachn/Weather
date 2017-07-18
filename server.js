@@ -39,8 +39,10 @@ app.set('view engine','hbs');
 app.use(express.static(process.env.PWD + '/public'));
 hbs.registerPartials(__dirname+'/views/partials');
 app.get('/',(req,res)=>{
-	var ip=requestIp.getClientIp(req);
+	//var ip=requestIp.getClientIp(req);
+	var ip='169.149.135.106';
 	console.log(`client Ip :: ${ip}`);
+
 	if(req._parsedOriginalUrl.query){
 	geocode.fetchAddress(req._parsedOriginalUrl.query,(errorMessage,result)=>{
 	if(errorMessage){
@@ -84,9 +86,11 @@ fetchWeather=(result,callback)=>{
 		    city=result.address;
 			longitude=result.longitude;
 			latitude=result.latitude;
+			console.log('fetching weather');
+			console.log(result);
 			weatherData.getWeather(result.latitude,result.longitude,(error,data)=>{
 			if(error){
-				console.log(errorMessage);
+				console.log(error);
 				callback(1,undefined);
 			}
 			else{
