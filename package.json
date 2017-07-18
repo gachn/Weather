@@ -4,13 +4,17 @@
   "description": "a simple weather app using google api",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "Andrew Mead",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.15.3",
+    "hbs": "^4.0.1",
     "lodash": "^4.13.1",
     "request": "^2.73.0",
+    "request-ip": "^2.0.2",
     "yards": "^0.1.4",
     "yargs": "^4.7.1"
   },
