@@ -37,7 +37,7 @@ hbs.registerHelper('longitude',()=>{
 
 app.set('view engine','hbs');
 app.use(express.static(process.env.PWD + '/Public'));
-hbs.registerPartials(dirname+'/views/partials');
+hbs.registerPartials(__dirname+'/views/partials');
 app.get('/',(req,res)=>{
 	var ip=requestIp.getClientIp(req);;
 	
