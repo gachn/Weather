@@ -7,7 +7,7 @@ var requestIp = require('request-ip');
 
 
 const port=process.env.PORT || 3000;
-const dirname=process.cwd() || __dirname; 
+process.env.PWD = process.cwd();
 var app=express();
 var longitude,latitude,city;
 
@@ -36,7 +36,8 @@ hbs.registerHelper('longitude',()=>{
 });
 
 app.set('view engine','hbs');
-app.use(express.static(dirname+'/Public'));
+app.use(express.static(process.env.PWD + '/htdocs'));
+app.use(express.static(process.env.PWD + '/Public'));
 hbs.registerPartials(dirname+'/views/partials');
 app.get('/',(req,res)=>{
 	var ip=requestIp.getClientIp(req);;
