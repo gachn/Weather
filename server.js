@@ -39,8 +39,8 @@ app.set('view engine','hbs');
 app.use(express.static(process.env.PWD + '/public'));
 hbs.registerPartials(__dirname+'/views/partials');
 app.get('/',(req,res)=>{
-	//var ip=requestIp.getClientIp(req);
-	var ip='169.149.135.106';
+	var ip=requestIp.getClientIp(req);
+	
 	console.log(`client Ip :: ${ip}`);
 
 	if(req._parsedOriginalUrl.query){
