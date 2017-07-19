@@ -10,7 +10,7 @@ const port=process.env.PORT || 3000;
 process.env.PWD = process.cwd();
 var app=express();
 var longitude,latitude,city;
-console.log(`Dir : ${process.cwd()}  : dirname : ${__dirname}`);
+
 var getCurrentDate=()=>{
 	var date=new Date();
 	var data={
@@ -25,6 +25,10 @@ hbs.registerHelper('day',()=>{
 hbs.registerHelper('date',()=>{
 		return getCurrentDate().date;
 });
+
+hbs.registerHelper('year',()=>{
+		return (new Date()).getFullYear();
+});
 hbs.registerHelper('city',()=>{
 		return city;
 });
@@ -37,25 +41,23 @@ hbs.registerHelper('longitude',()=>{
 
 app.set('view engine','hbs');
 app.use(express.static(process.env.PWD + '/public'));
-hbs.registerPartials(__dirname+'/views/partials');
+hbs.registerPartials(process.env.PWD+'/views/partials');
 app.get('/',(req,res)=>{
-	//var ip=requestIp.getClientIp(req);
-	var ip='169.149.135.106';
-	console.log(`client Ip :: ${ip}`);
-
+	var ip=requestIp.getClientIp(req);
 	if(req._parsedOriginalUrl.query){
 	geocode.fetchAddress(req._parsedOriginalUrl.query,(errorMessage,result)=>{
 	if(errorMessage){
 		console.log(errorMessage);
-		res.render('index.hbs');
+		res.render('index.hbs',{
+			Message: errorMessage
+		});
 	}
 	else{
-	console.log(`___________________________________`);	
-		console.log(`Weather Report of ${result.address}`);
-		console.log(`___________________________________`);	
-			fetchWeather(result,(page,data)=>{
+		fetchWeather(result,(page,data)=>{
 				if(page === 1)					
-					res.render('index.hbs');
+					res.render('index.hbs',{
+						Message: "Unable to fetch weather.Try Again" 
+					});
 				else
 					res.render('report.hbs',data);
 			});
@@ -65,8 +67,7 @@ app.get('/',(req,res)=>{
 	else{
 			iplocation.findLocation(ip,(error,result)=>{
 					if(error){
-						console.log(`IP ERROR`);
-						res.render('index.hbs');
+						res.render('index.hbs',{Message:"Welcome"});
 					}
 					else
 					{
@@ -86,16 +87,12 @@ fetchWeather=(result,callback)=>{
 		    city=result.address;
 			longitude=result.longitude;
 			latitude=result.latitude;
-			console.log('fetching weather');
-			console.log(result);
 			weatherData.getWeather(result.latitude,result.longitude,(error,data)=>{
 			if(error){
 				console.log(error);
 				callback(1,undefined);
 			}
 			else{
-				console.log('in');
-				console.log(`lat ${latitude} lng ${longitude}`);
 				var current = weatherData.currentData(data,1);
 				callback(2,current);	
 			}

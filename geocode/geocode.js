@@ -9,7 +9,7 @@ request({url:reqAddress,json:true},(error,response,body)=> {
 	 	callback('Unable to connect to Google Server');
 	 }
 	 else if(body.status==='ZERO_RESULTS'){
-			callback(`Unable to find the Address ${userAddress}`);
+			callback(`Unable to find the Address`);
 	 }
 	 else if(body.status==='OK'){
 	 callback(undefined,{	
@@ -19,7 +19,7 @@ request({url:reqAddress,json:true},(error,response,body)=> {
    	 }
    	 );
    	}
-   	else callback(`Unknown Error`);
+   	else callback(`Unknown Error,Try again`);
 	 	
 });
 }

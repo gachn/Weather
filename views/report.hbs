@@ -1,13 +1,14 @@
 {{>header}}
+
 <div class="hero" data-bg-image="images/banner.png">
     <div class="container">
         <form action="/" class="find-location" method="GET">
             <input type="text" name="q" placeholder="Find your location...">
             <input type="submit" value="Find">
-        </form>
-
+        </form>       
     </div>
 </div>
+<div class="filter">&nbsp</div><br>
 <div class="forecast-table">
     <div class="container">
         <div class="forecast-container">
@@ -115,14 +116,17 @@
         </div>
     </div>
 </div>
+
 <div align="center">
-<div id="map" style="width:85%;height:500px;margin-bottom:50px;"></div>
+<div id="map" style="width:84%;height:500px;margin-bottom:50px;
+border-radius: 25px;
+    border: 2px solid #73AD21;"></div>
 </div>
 <script>
 function myMap() {
   var myCenter = new google.maps.LatLng({{latitude}},{{longitude}});
   var mapCanvas = document.getElementById("map");
-  var mapOptions = {center: myCenter, zoom: 12};
+  var mapOptions = {center: myCenter, zoom: 15};
   var map = new google.maps.Map(mapCanvas, mapOptions);
   var marker = new google.maps.Marker({position:myCenter});
   marker.setMap(map);
