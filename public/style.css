@@ -1229,7 +1229,7 @@ form textarea {
     bottom: 5px;
     padding: 0 40px; }
 
-.-container {
+.forecast-container {
   width: 100%;
   background: #323544;
   display: table;
